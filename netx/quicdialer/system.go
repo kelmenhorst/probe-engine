@@ -51,6 +51,9 @@ type saverUDPConn struct {
 }
 
 func (c saverUDPConn) WriteTo(p []byte, addr net.Addr) (int, error) {
+	// delay write
+	time.Sleep(time.Duration(200) * time.Millisecond)
+
 	start := time.Now()
 	count, err := c.UDPConn.WriteTo(p, addr)
 	stop := time.Now()
@@ -67,6 +70,9 @@ func (c saverUDPConn) WriteTo(p []byte, addr net.Addr) (int, error) {
 }
 
 func (c saverUDPConn) ReadMsgUDP(b, oob []byte) (int, int, int, *net.UDPAddr, error) {
+	// delay read
+	time.Sleep(time.Duration(200) * time.Millisecond)
+
 	start := time.Now()
 	n, oobn, flags, addr, err := c.UDPConn.ReadMsgUDP(b, oob)
 	stop := time.Now()
